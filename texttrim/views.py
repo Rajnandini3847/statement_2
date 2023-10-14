@@ -2,7 +2,7 @@ from django.shortcuts import render
 from nltk import sent_tokenize
 from .QNA.questions_gen import QuestionGenerator 
 from .QNA.mcq_gen import QuizGenerator
-# Create your views here.
+from .MLFunctions.ask_queries import answer_question
 
 def home(request):
     return render(request, 'index.html')
@@ -121,3 +121,13 @@ def quiz(request):
         return render(request, 'quiz.html', {'summary': summary, 'quiz_questions': quiz_questions})
     
     return render(request, 'quiz.html', {'summary': summary})
+
+
+def queries(request):
+    if request.method == 'POST':
+        context = request.POST.get('context', '')
+        question = request.POST.get('question', '')
+        answer = answer_question(context, question)
+        return render(request, 'queries.html', {'context': context, 'question': question, 'answer': answer})
+
+    return render(request, 'queries.html', {'context': '', 'question': '', 'answer': ''})
