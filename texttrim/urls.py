@@ -12,4 +12,5 @@ urlpatterns = [
     path('bert/', bert, name='bert'),
     path('xlnet/', xlnet, name='xlnet'),
     path('question/', questions, name='questions'),
+    path('quiz/', quiz, name='quiz'),
 ]

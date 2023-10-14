@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from nltk import sent_tokenize
-from .QNA.questions_gen import QuestionGenerator
+from .QNA.questions_gen import QuestionGenerator 
+from .QNA.mcq_gen import QuizGenerator
 # Create your views here.
 
 def home(request):
@@ -105,3 +106,18 @@ def questions(request):
         return render(request, 'questions.html', {'summary': summary, 'all_questions': all_questions})
     
     return render(request, 'questions.html', {'summary': summary})
+
+
+def quiz(request):
+    summary = request.POST.get('summary')
+
+    if request.method == 'POST' and summary:
+        sentences = sent_tokenize(summary)
+        text = ' '.join(sentences)
+
+        quiz_generator = QuizGenerator(text)
+        quiz_questions = quiz_generator.generate_all_questions()
+
+        return render(request, 'quiz.html', {'summary': summary, 'quiz_questions': quiz_questions})
+    
+    return render(request, 'quiz.html', {'summary': summary})
