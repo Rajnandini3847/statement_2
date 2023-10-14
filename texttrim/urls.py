@@ -11,5 +11,5 @@ urlpatterns = [
     path('gpt2/', gpt2, name='gpt2'),
     path('bert/', bert, name='bert'),
     path('xlnet/', xlnet, name='xlnet'),
-    path('question/', questions, name='question'),
+    path('question/', questions, name='questions'),
 ]
