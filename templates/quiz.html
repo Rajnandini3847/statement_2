@@ -5,20 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Quiz</title>
-    <!-- Include Tailwind CSS -->
+ 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Add custom styles for scroll -->
+ 
     <style>
         body {
-            overflow-y: auto; /* Allow vertical scrolling */
+            overflow-y: auto; 
         }
 
         .container {
-            max-width: 800px; /* Adjust the maximum width as needed */
-            margin: 0 auto; /* Center the container */
+            max-width: 800px; 
+            margin: 0 auto; 
         }
 
-        /* Add more styling as needed */
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -64,10 +63,10 @@
                 return q.innerText;
             }).join('\n');
 
-            // Create a Blob with the exported text
+            
             var blob = new Blob([exportedQuizQuestions], { type: 'text/plain' });
 
-            // Create a link element and trigger a click to download the file
+            
             var link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
             link.download = 'exported_quiz_questions.txt';

@@ -107,7 +107,6 @@ def questions(request):
         question_generator = QuestionGenerator(text)
         all_questions = question_generator.generate_all_questions()
 
-        # Pass the questions and summary to the template
         return render(request, 'questions.html', {'summary': summary, 'all_questions': all_questions})
     
     return render(request, 'questions.html', {'summary': summary})
@@ -146,7 +145,6 @@ from .models import AudioFile
 from pydub import AudioSegment
 from .MLFunctions.whisper_ai_v import transcribe_mp3
 def process_audio(file_path):
-    # Process audio as needed (convert to MP3, etc.)
     audio = AudioSegment.from_file(file_path)
     processed_audio = audio.export(file_path.replace('.wav', '.mp3'), format='mp3')
     return processed_audio

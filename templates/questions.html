@@ -45,7 +45,7 @@
 
     </div>
 
-   <!-- Add this script in the <head> section or at the end of the body before the closing </body> tag -->
+   
 <script>
     document.getElementById('exportBtn').addEventListener('click', function () {
         var questions = document.querySelectorAll('td');
@@ -53,10 +53,10 @@
             return q.innerText;
         }).join('\n');
 
-        // Create a Blob with the exported text
+        
         var blob = new Blob([exportedQuestions], { type: 'text/plain' });
 
-        // Create a link element and trigger a click to download the file
+        
         var link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'exported_questions.txt';
