@@ -14,28 +14,30 @@
 
     <div class="bg-white p-8 rounded shadow-md w-206">
         <h2 class="text-2xl font-semibold mb-4 text-center">Audio uploaded and processed successfully!</h2>
-        <div class="text-gray-700 text-center">
+        <div class="text-gray-700 text-center break-all">
             {{result}}
         </div>
         <div class="mt-4 text-center">
-            <a href="#" class="text-blue-500 underline" onclick="exportToTxt()">Export to TXT</a>
+            <button id="exportBtn" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-md">Export text</button>
         </div>
     </div>
 
     <script>
-        function exportToTxt() {
-            // Assuming 'result' contains the text to export
-            const resultText = document.querySelector('.text-gray-700').innerText;
-
-            // Create a Blob with the text content
-            const blob = new Blob([resultText], { type: 'text/plain' });
-
-            // Create a download link and trigger a click to download the file
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'exported_result.txt';
+        document.getElementById('exportBtn').addEventListener('click', function () {
+            var questions = document.querySelectorAll('td');
+            var exportedQuestions = Array.from(questions).map(function (q) {
+                return q.innerText;
+            }).join('\n');
+    
+            // Create a Blob with the exported text
+            var blob = new Blob([exportedQuestions], { type: 'text/plain' });
+    
+            // Create a link element and trigger a click to download the file
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'exported_questions.txt';
             link.click();
-        }
+        });
     </script>
 
 </body>

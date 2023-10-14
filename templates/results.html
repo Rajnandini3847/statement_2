@@ -121,7 +121,7 @@
     </div>
 
     <div class="result-box">
-      <button class="copy-icon hover:text-white" onclick="copySummary">&#128203; Copy Summary</button>
+  
       {% if summary %}
       <h2 class="text-blue-300">Summary:</h2>
       <p>{{ summary }}</p>
@@ -144,15 +144,7 @@
           a.click();
           document.body.removeChild(a);
       };
-      function copySummary() {
-        var summaryText = document.getElementById('summaryText');
-        var range = document.createRange();
-        range.selectNode(summaryText);
-        window.getSelection().removeAllRanges();
-        window.getSelection().addRange(range);
-        document.execCommand('copy');
-        window.getSelection().removeAllRanges();
-    }
+      
   </script>
    
 </body>
