@@ -1,0 +1,117 @@
+<!-- myapp/templates/summary.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLTK Summary</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(#192e53, #112c4a);
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .button-bar {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-bar button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .result-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 700px; /* Adjusted width */
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, .5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+            border-radius: 10px;
+        }
+
+        .result-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .result-box p {
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="dropdown">
+            <button class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Choose Another Model</button>
+            <div class="dropdown-content">
+                <a href="{% url "bert" %} " class="no-underline">BERT</a>
+                <a href="{% url "gpt2" %}" class="no-underline">GPT 2</a>
+                <a href="{% url "xlnet" %}" class="no-underline">XLNet</a>
+            </div>
+        </div>
+
+        <button class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><a href="{% url "questions" %}"> Generate 10 Questions</button></a>
+        <button class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><a href="{% url "quiz" %}">Generate 10 MCQs</a></button>
+    </div>
+
+    <div class="result-box">
+        {% if summary %}
+            <h2>Summary:</h2>
+            <p>{{ summary }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

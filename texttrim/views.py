@@ -63,7 +63,7 @@ def nltk(request):
         text = request.POST.get('text')
         lines = request.POST.get('lines')
         summary = main(text,lines)
-        return render(request, 'summary.html', {'summary': summary})
+        return render(request, 'results.html', {'summary': summary})
     return render(request, 'summary.html')
 
 def gpt2(request):
