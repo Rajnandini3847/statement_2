@@ -4,34 +4,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Generate Quiz</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Add custom styles for scroll -->
+    <style>
+        body {
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+
+        .container {
+            max-width: 800px; /* Adjust the maximum width as needed */
+            margin: 0 auto; /* Center the container */
+        }
+
+        /* Add more styling as needed */
+    </style>
 </head>
-<body>
-    <h1>Generate Quiz</h1>
+<body class="bg-gray-100 font-sans">
 
-    <form method="post" action="{% url 'quiz' %}">
-        {% csrf_token %}
-        <label for="summary">Paste Text:</label>
-        <textarea id="summary" name="summary" rows="4" cols="50" required>{{ summary }}</textarea><br>
-        <button type="submit">Generate Quiz</button>
-    </form>
+    <div class="container mx-auto p-8 bg-white rounded-lg shadow-lg">
 
-    {% if quiz_questions %}
-        <h2>Generated Quiz Questions</h2>
-        <ul>
-            {% for question, choices in quiz_questions %}
-                <li>
-                    {{ question }}
-                    <ul>
-                        {% for choice in choices %}
-                            <li>{{ choice }}</li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        <h1 class="text-3xl font-bold mb-6 text-center">Generate Quiz</h1>
 
-    <a href="{% url 'home' %}">Go back to home</a>
+        <form method="post" action="{% url 'quiz' %}" class="mb-8">
+            {% csrf_token %}
+            <label for="summary" class="block text-sm font-medium text-gray-600">Paste Text:</label>
+            <textarea id="summary" name="summary" rows="4" cols="50"
+                      class="mt-1 p-2 block w-full rounded-md border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                      required>{{ summary }}</textarea>
+            <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md">Generate Quiz</button>
+        </form>
+
+        {% if quiz_questions %}
+            <h2 class="text-2xl font-bold mb-4 text-center">Generated Quiz Questions</h2>
+            <ul>
+                {% for question, choices in quiz_questions %}
+                    <li class="mb-4">
+                        {{ question }}
+                        <ul class="list-disc ml-4">
+                            {% for choice in choices %}
+                                <li>{{ choice }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button id="exportBtn" class="mt-4 px-4 py-2 bg-green-500 text-white rounded-md">Export Quiz Questions</button>
+        {% endif %}
+
+        <a href="{% url 'home' %}" class="mt-8 text-blue-500 block text-center">Go back to home</a>
+
+    </div>
+
+    <script>
+        document.getElementById('exportBtn').addEventListener('click', function () {
+            var quizQuestions = document.querySelectorAll('li');
+            var exportedQuizQuestions = Array.from(quizQuestions).map(function (q) {
+                return q.innerText;
+            }).join('\n');
+
+            // Create a Blob with the exported text
+            var blob = new Blob([exportedQuizQuestions], { type: 'text/plain' });
+
+            // Create a link element and trigger a click to download the file
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'exported_quiz_questions.txt';
+            link.click();
+        });
+    </script>
+
 </body>
 </html>

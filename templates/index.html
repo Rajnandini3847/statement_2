@@ -872,9 +872,9 @@
 
             <ul class="nav-links">
 
-                <li><a>HOME</a></li>
-                <li><a>ABOUT</a></li>
-                <li><a>SERVICES</a></li>
+                <li><a href="/">HOME</a></li>
+                <li><a href="#linked_id">ABOUT</a></li>
+                <li><a href="#two">SERVICES</a></li>
                  
 
                 </li>
@@ -899,45 +899,48 @@
               
                 <div class="two-button">
                      
-                    <button class="t-btn btn">Generate summary</button>
+                    <button class="t-btn btn"  >
+                      <a href="{% url "nltk" %}">
+                        Generate summary
+                      </a>
+                     
+                    </button>
                 </div>
 
             </div>
     </section>
 
     <section id="one-half" class="goblack">
-        <span><img src="https://www.ibm.com/blog/wp-content/uploads/2023/03/What-is-Generative-AI-what-are-Foundation-Models-and-why-do-they-matter-scaled.jpg" alt=""></span>
-
-        <div class="half-content">
-            <div class="half__text">
-                <h1>About Us</h1>
-                <p> At TextTrim, our mission is to facilitate a seamless and enriching learning experience for students. We have developed a versatile platform that offers rapid note summarization, a responsive chatbot for quick question resolutions, and transformation of voice notes, regardless of the language, into text, followed by summarization. With our user-friendly interface, students can also create their own multiple-choice questions (MCQs) to deepen their understanding. Our ultimate aim is to help students excel academically and grow personally.</p>
-            </div>
-            <div class="half__boxes">
-                <div class="box">
-                    <span href="#"><i class="fas fa-paw logo"></i></span>
-                    <h2>Our Mission</h2>
-                    <p>Our objective is to enhance the day-to-day experiences of students by simplifying the process of summarizing lengthy notes. Additionally, we offer services such as answering their doubts and providing a platform for generating multiple-choice questions (MCQs) to facilitate their comprehension and learning.</p>
-                </div>
-                <div class="box">
-                    <span href="#"><i class="fas fa-paw logo"></i></span>
-                    <h2>Our Vision</h2>
-                    <p> Our vision is to simplify students' lives and improve their learning experiences through a comprehensive platform that offers fast note summarization, responsive doubt resolution, interactive learning, and the power of MCQ generation. We aim to be the trusted resource where students can easily condense their study materials, get answers to their questions from a helpful chatbot, and use Whisper AI to enhance their learning through personalized, whispered insights. This all comes together to give students more control over their education, leading to success in school and personal growth.
-
-
-
-
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </section>
+      <span><img src="https://www.ibm.com/blog/wp-content/uploads/2023/03/What-is-Generative-AI-what-are-Foundation-Models-and-why-do-they-matter-scaled.jpg" alt="" height="40px" width="50px"></span>
+  
+      <div class="half-content">
+          <div class="half__text">
+              <h1 id="linked_id">About Us</h1>
+              <p>At TextTrim, our mission is to facilitate a seamless and enriching learning experience for students. We have developed a versatile platform that offers rapid note summarization, a responsive chatbot for quick question resolutions, and transformation of voice notes, regardless of the language, into text, followed by summarization. With our user-friendly interface, students can also create their own multiple-choice questions (MCQs) to deepen their understanding. Our ultimate aim is to help students excel academically and grow personally.</p>
+          </div>
+  
+          <div class="half__boxes">
+              <div class="box">
+                  <span href="#"><i class="fas fa-paw logo"></i></span>
+                  <h2>Our Mission</h2>
+                  <p>Our objective is to enhance the day-to-day experiences of students by simplifying the process of summarizing lengthy notes. Additionally, we offer services such as answering their doubts and providing a platform for generating multiple-choice questions (MCQs) to facilitate their comprehension and learning.</p>
+              </div>
+  
+              <div class="box">
+                  <span href="#"><i class="fas fa-paw logo"></i></span>
+                  <h2>Our Vision</h2>
+                  <p>Our vision is to simplify students' lives and improve their learning experiences through a comprehensive platform that offers fast note summarization, responsive doubt resolution, interactive learning, and the power of MCQ generation. We aim to be the trusted resource where students can easily condense their study materials, get answers to their questions from a helpful chatbot, and use Whisper AI to enhance their learning through personalized, whispered insights. This all comes together to give students more control over their education, leading to success in school and personal growth.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  
 
 
     <section id="two">
         <div class="heading ">
-            <h1>What We Do</h1>
+            <h1 id="services">What We Do</h1>
             <p class="lightblack"> 
               We summarizes long text data into a concisely understandable manner so anybody can generate summary easily for their better unterstanding</p>
 
@@ -985,6 +988,10 @@
 
 
     </section>
+    <footer class="bg-gray-800 text-white p-4 text-center">
+      <p class="text-sm">Team Codex &copy; 2023 IIT(ISM)D</p>
+    </footer>
+  
 
 
 

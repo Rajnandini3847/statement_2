@@ -136,3 +136,31 @@ def queries(request):
         return render(request, 'queries.html', {'context': context, 'question': question, 'answer': answer})
 
     return render(request, 'queries.html', {'context': '', 'question': '', 'answer': ''})
+
+
+# views.py
+
+from django.shortcuts import render, redirect
+from .forms import AudioFileForm
+from .models import AudioFile
+from pydub import AudioSegment
+
+def process_audio(file_path):
+    # Process audio as needed (convert to MP3, etc.)
+    audio = AudioSegment.from_file(file_path)
+    processed_audio = audio.export(file_path.replace('.wav', '.mp3'), format='mp3')
+    return processed_audio
+
+def upload_audio(request):
+    if request.method == 'POST':
+        form = AudioFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            audio_file = form.save()
+            file_path = audio_file.audio.path
+            processed_audio = process_audio(file_path)
+            audio_file.audio.name = audio_file.audio.name.replace('.wav', '.mp3')
+            audio_file.audio.save(audio_file.audio.name, processed_audio)
+            return redirect('home')
+    else:
+        form = AudioFileForm()
+    return render(request, 'upload_audio.html', {'form': form})
