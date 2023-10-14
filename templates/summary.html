@@ -1,0 +1,32 @@
+<!-- myapp/templates/summary.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLTK Summary</title>
+</head>
+<body>
+    <div class="container mx-auto mt-8">
+        <h2 class="text-2xl font-bold mb-4">NLTK Summary</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="text">Enter Text:</label>
+            <textarea id="text" name="text" rows="4" cols="50" required></textarea>
+            <br>
+            <label for="lines">Enter how many lines of summary u need:</label>
+            <input type="number" id="lines" name="lines" min="1" max="10" required>
+            <br>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Generate Summary</button>
+        </form>
+
+        {% if summary %}
+            <div class="mt-4">
+                <h3 class="text-xl font-bold mb-2">Summary:</h3>
+                <p>{{ summary }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- question_generator/templates/questions.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Questions</title>
+</head>
+<body>
+    <h1>Generate Questions</h1>
+
+    <form method="post" action="{% url 'questions' %}">
+        {% csrf_token %}
+        <label for="summary">Paste Text:</label>
+        <textarea id="summary" name="summary" rows="4" cols="50" required>{{ summary }}</textarea><br>
+        <button type="submit">Generate Questions</button>
+    </form>
+
+    {% if all_questions %}
+        <h2>Generated Questions</h2>
+        <ul>
+            {% for question in all_questions %}
+                <li>{{ question }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="{% url 'home' %}">Go back to home</a>
+</body>
+</html>
