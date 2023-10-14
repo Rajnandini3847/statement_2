@@ -15,4 +15,5 @@ urlpatterns = [
     path('quiz/', quiz, name='quiz'),
     path('queries/', queries, name='queries'),
     path('upload/', upload_audio, name='upload'),
+    path('translator_hin/',translator_hin,name='translator_hin')
 ]

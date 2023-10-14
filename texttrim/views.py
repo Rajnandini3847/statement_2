@@ -3,6 +3,7 @@ from nltk import sent_tokenize
 from .QNA.questions_gen import QuestionGenerator 
 from .QNA.mcq_gen import QuizGenerator
 from .MLFunctions.ask_queries import answer_question
+from .MLFunctions.translator import translate_hindi_to_english
 
 def home(request):
     return render(request, 'index.html')
@@ -164,3 +165,10 @@ def upload_audio(request):
     else:
         form = AudioFileForm()
     return render(request, 'upload_audio.html', {'form': form})
+
+def translator_hin(request):
+    if request.method == 'POST':
+        text = request.POST.get('text')
+        summary = translate_hindi_to_english(text)
+        return render(request, 'translator.html',{'summary':summary})
+    return render(request, 'translator.html')
