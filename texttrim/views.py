@@ -144,7 +144,7 @@ from django.shortcuts import render, redirect
 from .forms import AudioFileForm
 from .models import AudioFile
 from pydub import AudioSegment
-
+from .MLFunctions.whisper_ai_v import transcribe_mp3
 def process_audio(file_path):
     # Process audio as needed (convert to MP3, etc.)
     audio = AudioSegment.from_file(file_path)
@@ -160,7 +160,9 @@ def upload_audio(request):
             processed_audio = process_audio(file_path)
             audio_file.audio.name = audio_file.audio.name.replace('.wav', '.mp3')
             audio_file.audio.save(audio_file.audio.name, processed_audio)
-            return redirect('home')
+            result = transcribe_mp3(file_path.replace('.wav', '.mp3'))
+            
+            return render(request, 'sucess.html', {'result': result})
     else:
         form = AudioFileForm()
     return render(request, 'upload_audio.html', {'form': form})
