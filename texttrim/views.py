@@ -59,36 +59,41 @@ def logout_view(request):
     return redirect('login')  
 
 def nltk(request):
+    model = 'NLTK'
     if request.method == 'POST':
         text = request.POST.get('text')
         lines = request.POST.get('lines')
         summary = main(text,lines)
+        
         return render(request, 'results.html', {'summary': summary})
-    return render(request, 'summary.html')
+    return render(request, 'summary.html',{'model':model})
 
 def gpt2(request):
+    model = 'GPT2'
     if request.method == 'POST':
         text = request.POST.get('text')
         lines = request.POST.get('lines')
         summary = gpt2_summary(text,lines)
-        return render(request, 'summary.html', {'summary': summary})
-    return render(request, 'summary.html')
+        return render(request, 'results.html', {'summary': summary})
+    return render(request, 'summary.html',{'model':model})
 
 def bert(request):
+    model = 'BERT'
     if request.method == 'POST':
         text = request.POST.get('text')
         lines = request.POST.get('lines')
         summary = bert_summary(text,lines)
-        return render(request, 'summary.html', {'summary': summary})
-    return render(request, 'summary.html')
+        return render(request, 'results.html', {'summary': summary})
+    return render(request, 'summary.html',{'model':model})
 
 def xlnet(request):
+    model = 'XLNet'
     if request.method == 'POST':
         text = request.POST.get('text')
         lines = request.POST.get('lines')
         summary = xlnet_summary(text,lines)
-        return render(request, 'summary.html', {'summary': summary})
-    return render(request, 'summary.html')
+        return render(request, 'results.html', {'summary': summary})
+    return render(request, 'summary.html',{'model':model})
 
 
 

@@ -97,21 +97,62 @@
         <div class="dropdown">
             <button class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Choose Another Model</button>
             <div class="dropdown-content">
+              <a href="{% url "nltk" %} " class="no-underline">NLTK</a>
                 <a href="{% url "bert" %} " class="no-underline">BERT</a>
                 <a href="{% url "gpt2" %}" class="no-underline">GPT 2</a>
                 <a href="{% url "xlnet" %}" class="no-underline">XLNet</a>
             </div>
+            
         </div>
+        <div class="dropdown">
+          <button class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Ask Queries</button>
+        <div class="dropdown-content">
+            <a href="{% url "gpt2" %}" class="no-underline">Via Mike</a>
+            <a href="{% url "queries" %}" class="no-underline">Via Text</a>
+        </div>
+      </div>
 
         <button class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><a href="{% url "questions" %}"> Generate 10 Questions</button></a>
         <button class="bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"><a href="{% url "quiz" %}">Generate 10 MCQs</a></button>
+        <button class="export-button bg-transparent hover:bg-blue-500 text-blue-400 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onclick="exportSummary()">Export Summary</button>
+        
+  
     </div>
 
     <div class="result-box">
-        {% if summary %}
-            <h2>Summary:</h2>
-            <p>{{ summary }}</p>
-        {% endif %}
+      <button class="copy-icon hover:text-white" onclick="copySummary">&#128203; Copy Summary</button>
+      {% if summary %}
+      <h2 class="text-blue-300">Summary:</h2>
+      <p>{{ summary }}</p>
+      {% endif %}
+      
     </div>
+    <script>
+      document.getElementById('generateQuestionsBtn').addEventListener('click', function() {
+        var summaryText = document.getElementById('summaryText').innerText;
+        generateQuestions(summaryText);
+    });
+
+      function exportSummary() {
+          var summaryText = document.querySelector('.result-box p').innerText;
+          var blob = new Blob([summaryText], { type: 'text/plain' });
+          var a = document.createElement('a');
+          a.href = window.URL.createObjectURL(blob);
+          a.download = 'summary.txt';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+      };
+      function copySummary() {
+        var summaryText = document.getElementById('summaryText');
+        var range = document.createRange();
+        range.selectNode(summaryText);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+    }
+  </script>
+   
 </body>
 </html>
